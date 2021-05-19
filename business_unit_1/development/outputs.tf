@@ -14,37 +14,82 @@
  * limitations under the License.
  */
 
-output "instances_self_links" {
-  description = "List of self-links for compute instances"
-  value       = module.base_shared_gce_instance.instances_self_links
+output "base_shared_vpc_project" {
+  description = "Project sample base project."
+  value       = module.base_shared_vpc_project.project_id
 }
 
-output "instances_names" {
-  description = "List of names for compute instances"
-  value       = [for u in module.base_shared_gce_instance.instances_details : u.name]
+output "base_shared_vpc_project_sa" {
+  description = "Project sample base project SA."
+  value       = module.base_shared_vpc_project.sa
 }
 
-output "instances_zones" {
-  description = "List of zone for compute instances"
-  value       = [for u in module.base_shared_gce_instance.instances_details : u.zone]
+output "floating_project" {
+  description = "Project sample floating project."
+  value       = module.floating_project.project_id
 }
 
-output "instances_details" {
-  description = "List of details for compute instances"
-  value       = module.base_shared_gce_instance.instances_details
+output "peering_project" {
+  description = "Project sample peering project id."
+  value       = module.peering_project.project_id
 }
 
-output "available_zones" {
-  description = "List of available zones in region"
-  value       = module.base_shared_gce_instance.available_zones
+output "peering_network" {
+  description = "Peer network peering resource."
+  value       = module.peering.peer_network_peering
 }
 
-output "project_id" {
-  description = "Project where compute instance was created"
-  value       = module.base_shared_gce_instance.project_id
+output "restricted_shared_vpc_project" {
+  description = "Project sample restricted project id."
+  value       = module.restricted_shared_vpc_project.project_id
 }
 
-output "region" {
-  description = "Region where compute instance was created"
-  value       = module.base_shared_gce_instance.region
+output "restricted_shared_vpc_project_number" {
+  description = "Project sample restricted project."
+  value       = module.restricted_shared_vpc_project.project_number
+}
+
+output "vpc_service_control_perimeter_name" {
+  description = "VPC Service Control name."
+  value       = var.perimeter_name
+}
+
+output "restricted_enabled_apis" {
+  description = "Activated APIs."
+  value       = module.restricted_shared_vpc_project.enabled_apis
+}
+
+output "access_context_manager_policy_id" {
+  description = "Access Context Manager Policy ID."
+  value       = var.access_context_manager_policy_id
+}
+
+output "peering_complete" {
+  description = "Output to be used as a module dependency."
+  value       = module.peering.complete
+}
+
+output "env_secrets_project" {
+  description = "Project sample peering project id."
+  value       = module.env_secrets_project.project_id
+}
+
+output "keyring" {
+  description = "The name of the keyring."
+  value       = module.kms.keyring
+}
+
+output "keys" {
+  description = "List of created key names."
+  value       = keys(module.kms.keys)
+}
+
+output "bucket" {
+  description = "The created storage bucket"
+  value       = module.gcs_buckets.bucket
+}
+
+output "cloudrun-url" {
+  description = "The Cloud run URL"
+  value       = google_cloud_run_service.default.status.url
 }
