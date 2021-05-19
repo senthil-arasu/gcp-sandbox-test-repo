@@ -9,6 +9,9 @@ resource "google_cloud_run_service" "default" {
         image = "us-docker.pkg.dev/cloudrun/container/hello"
       }
     }
+    metadata {
+      name = "cloudrun-srv-blue"
+    }    
   }
 }
 
@@ -28,6 +31,18 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
 
   policy_data = data.google_iam_policy.noauth.policy_data
 }
+
+traffic {
+    percent       = 75
+    #The revision being created or an existing revision 
+    revision_name = "cloudrun-srv-qqcvj"
+  }
+
+  traffic {
+    percent       = 25
+    #The revision being created or an existing revision
+    revision_name = "cloudrun-srv-blue"
+  }
 
 //data "google_projects" "environment_projects" {
 //  filter = "parent.id:${split("/", var.folder_id)[1]} name:*${var.project_suffix}* labels.application_name=${var.business_code}-sample-application labels.environment=${var.environment} lifecycleState=ACTIVE"
