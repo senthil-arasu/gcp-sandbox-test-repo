@@ -16,5 +16,5 @@
 
 output "cloudrun-url" {
   description = "The Cloud run URL"
-  value       = google_cloud_run_service.default.status.url
+  value       = google_cloud_run_service.default.status
 }
