@@ -14,13 +14,13 @@ resource "google_cloud_run_service" "default" {
     }    
   }
   traffic {
-    percent       = 75
+    percent       = 60
     #The revision being created or an existing revision 
     revision_name = "cloudrun-srv-qqcvj"
   }
 
   traffic {
-    percent       = 25
+    percent       = 40
     #The revision being created or an existing revision
     revision_name = "cloudrun-srv-blue"
   }
